@@ -5,7 +5,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 client = MongoClient("mongodb://10.96.0.101:27017")
-db = client.get_default_database()
+db = client['mydb']
 
 @app.route('/crawl', methods=['GET'])
 def crawl_url():
@@ -15,7 +15,8 @@ def crawl_url():
 
     content = crawl(url)
     if content:
-        db.content.insert_one({"Test" : "Testing"})
+        db.articles.insert_one(content)
+        #db.articles.insert_one({"Test" : "Testing"})
         return jsonify({"Crawled content added to database"}), 200
     else:
         return jsonify({"error": "Failed to retrieve content"}), 500
