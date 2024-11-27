@@ -4,8 +4,8 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-client = MongoClient('mongodb-service-cluster', 27017)
-db = client['mongo-data']
+client = MongoClient("mongodb://10.96.0.101:27017")
+db = client['mongodb-service-cluster']
 
 @app.route('/crawl', methods=['GET'])
 def crawl_url():
