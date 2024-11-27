@@ -1,7 +1,11 @@
 from flask import Flask, request, jsonify
 from web_crawler import crawl 
+from pymongo import MongoClient
 
 app = Flask(__name__)
+
+client = MongoClient('mongodb-service-cluster', 27017)
+db = client['mongo-data']
 
 @app.route('/crawl', methods=['GET'])
 def crawl_url():
@@ -11,7 +15,8 @@ def crawl_url():
 
     content = crawl(url)
     if content:
-        return jsonify({"content": content}), 200
+        db.content.insert_one(content)
+        return jsonify({"Crawled content added to database"}), 200
     else:
         return jsonify({"error": "Failed to retrieve content"}), 500
 
