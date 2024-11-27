@@ -6,8 +6,11 @@ def crawl(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         main_content = extract_main_content(soup)
-        return main_content
-    else:
+        if main_content: 
+            return { 
+                "url": url, 
+                "content": main_content, 
+            } 
         return None
 
 def extract_main_content(soup): 
