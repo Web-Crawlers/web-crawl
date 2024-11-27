@@ -14,7 +14,7 @@ ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0 
 ENV FLASK_RUN_PORT=3000
 
-# Open port 8001
+# Open port 3000
 EXPOSE 3000
 
 # Set a default command to keep the container running but not execute the program
