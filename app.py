@@ -15,7 +15,7 @@ def crawl_url():
 
     content = crawl(url)
     if content:
-        db.content.insert_one(content)
+        db.content.insert_one({"Test" : "Testing"})
         return jsonify({"Crawled content added to database"}), 200
     else:
         return jsonify({"error": "Failed to retrieve content"}), 500
