@@ -23,5 +23,13 @@ def crawl_url():
     else:
         return jsonify({"error": "Failed to retrieve content"}), 500
 
+@app.route('/reset', methods=['GET'])
+def reset_db():
+    try:
+        db.Articles.delete_many({})
+        return jsonify({"Response": "Articles collection has been reset."}), 200
+    except Exception as e:
+        return jsonify({"Response": f'Failed to reset "Articles" collection (Exception: {e})'})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
